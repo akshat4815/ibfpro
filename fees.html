@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form and Payment Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for title styling -->
+    <style>
+        .page-title {
+            text-align: center;
+            font-family: 'Arial', sans-serif; /* Example font-family */
+            font-size: 2rem; /* Example font size */
+            font-weight: bold; /* Example font weight */
+            margin-bottom: 30px; /* Adjust margin as needed */
+            color: #333; /* Example color */
+            text-transform: uppercase; /* Example text transform */
+        }
+
+        .qr-code-img {
+            max-width: 400px; /* Adjust the max-width as per your design */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+    <body style="background-image: url('/img/bankedge.png'); background-size: cover; opacity: 0.9;">
+
+    <div class="container mt-4">
+        <h2 class="page-title">Admission Form</h2>
+        <form>
+            <!-- Personal Information -->
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" class="form-control" id="middleName">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="uri">Unique Registration Number (URI)</label>
+                <input type="text" class="form-control" id="uri" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fatherName">Father's/Guardian's Name</label>
+                    <input type="text" class="form-control" id="fatherName" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="fatherContact">Contact Number</label>
+                    <input type="tel" class="form-control" id="fatherContact" pattern="[0-9]{10}" title="Please enter 10 digits" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="motherName">Mother's Name</label>
+                    <input type="text" class="form-control" id="motherName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="motherContact">Contact Number</label>
+                    <input type="tel" class="form-control" id="motherContact" pattern="[0-9]{10}" title="Please enter 10 digits">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Gender</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="male">
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="female">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="homeAddress">Home Address</label>
+                <textarea class="form-control" id="homeAddress" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="correspondenceAddress">Correspondence Address</label>
+                <textarea class="form-control" id="correspondenceAddress" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" class="form-control" id="dob" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" title="Please enter 10 digits" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="alternateMobile">Alternate Mobile Number</label>
+                    <input type="tel" class="form-control" id="alternateMobile" pattern="[0-9]{10}" title="Please enter 10 digits">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="The updates will be sent to your registered mail" required>
+            </div>
+            <div class="form-group">
+                <label for="program">Program Applying For</label>
+                <select id="program" class="form-control">
+                    <option value="cfd">CFD</option>
+                    <option value="dff">DFF</option>
+                    <option value="qad">QAD</option>
+                </select>
+            </div>
+            <!-- Optional Fields -->
+            <div class="form-group">
+                <label for="occupation">Current Occupation (Optional)</label>
+                <input type="text" class="form-control" id="occupation">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="orgName">Organisation Name (Optional)</label>
+                    <input type="text" class="form-control" id="orgName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="workExp">Work Experience (Optional)</label>
+                    <select id="workExp" class="form-control">
+                        <option value="fresher">Fresher</option>
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3+ Years</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Payment Options -->
+            <div class="form-group">
+                <label>Payment Options</label><br>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentOption" id="oneTimePayment" value="oneTime" onclick="showQr()">
+                    <label class="form-check-label" for="oneTimePayment">One Time Payment</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentOption" id="installmentPayment" value="installment" onclick="showInstallmentOptions()">
+                    <label class="form-check-label" for="installmentPayment">Installment Payment</label>
+                </div>
+            </div>
+            <!-- QR Code Display Area -->
+            <div id="qrCodeArea" class="form-group d-none">
+                <label>QR Code</label><br>
+                <img id="qrImage" src="" alt="QR Code" class="qr-code-img">
+            </div>
+            <!-- Installment Options -->
+            <div id="installmentOptions" class="form-group d-none">
+                <label for="installment">Select Installment Plan</label>
+                <select id="installment" class="form-control" onchange="showQr()">
+                    <option value="" disabled selected>Select Installment Plan</option>
+                    <option value="2">2 Months</option>
+                    <option value="3">3 Months</option>
+                </select>
+            </div>
+            <!-- Transaction ID and Submit Button -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="transactionId">Transaction ID</label>
+                    <input type="text" class="form-control" id="transactionId" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script for QR Code display based on payment option -->
+    <script>
+        function showQr() {
+            var paymentOption = document.querySelector('input[name="paymentOption"]:checked').value;
+            if (paymentOption === 'oneTime') {
+                document.getElementById('installmentOptions').classList.add('d-none');
+                document.getElementById('qrCodeArea').classList.remove('d-none');
+                document.getElementById('qrImage').src = 'img/qr1.jpg'; // One Time Payment QR Code
+            } else if (paymentOption === 'installment') {
+                var installment = document.getElementById('installment').value;
+                if (installment === '2') {
+                    document.getElementById('qrCodeArea').classList.remove('d-none');
+                    document.getElementById('qrImage').src = 'img/qr2.jpg'; // 2 Months Installment QR Code
+                } else if (installment === '3') {
+                    document.getElementById('qrCodeArea').classList.remove('d-none');
+                    document.getElementById('qrImage').src = 'img/qr3.jpg'; // 3 Months Installment QR Code
+                } else {
+                    document.getElementById('qrCodeArea').classList.add('d-none');
+                }
+            }
+        }
+
+        function showInstallmentOptions() {
+            document.getElementById('installmentOptions').classList.remove('d-none');
+        }
+    </script>
+</body>
+</html>
